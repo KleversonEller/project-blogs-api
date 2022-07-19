@@ -1,12 +1,13 @@
 const express = require('express');
 const errorMiddleware = require('./middleware/error');
-const loginRouter = require('./routers/loginRouter');
+const router = require('./routers/index');
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/login', loginRouter);
+app.use('/login', router.login);
+app.use('/user', router.user);
 
 app.use(errorMiddleware);
 
