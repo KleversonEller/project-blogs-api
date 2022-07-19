@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const express = require('express');
-const loginController = require('../controllers/loginController');
+const controller = require('../controllers/index');
 
 router.use(express.json());
 
-router.post('/', loginController.login);
+router.post('/', controller.login);
 
 module.exports = router;
