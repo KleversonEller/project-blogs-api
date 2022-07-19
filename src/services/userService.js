@@ -10,4 +10,14 @@ const create = async (objeto) => {
     }
 };
 
-module.exports = { create };
+const getAll = async () => {
+    try {
+        const get = await User.findAll({ attributes: { exclude: ['password'] } });
+        const result = get.map((user) => user.dataValues);
+        return result;
+    } catch (error) {
+        return null;
+    }
+};
+
+module.exports = { create, getAll };
