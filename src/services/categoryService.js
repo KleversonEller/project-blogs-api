@@ -10,4 +10,13 @@ const create = async (name) => {
     }
 };
 
-module.exports = { create };
+const getAll = async () => {
+    try {
+        const result = await Category.findAll({ raw: true });
+        return result;
+    } catch (error) {
+        return null;
+    }
+};
+
+module.exports = { create, getAll };
