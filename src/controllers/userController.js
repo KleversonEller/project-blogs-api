@@ -3,7 +3,6 @@ const rescue = require('express-rescue');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const service = require('../services/index');
-// const errorList = require('../helpers/erros');
 
 const secret = process.env.JWT_SECRET;
 
@@ -28,4 +27,11 @@ const create = rescue(async (req, res, next) => {
     return res.status(201).json({ token });
 });
 
-module.exports = { create };
+const getAll = rescue(async (_req, res, next) => {
+    const result = await service.user.getAll();
+
+    if (!result) return next(result.error);
+    return res.status(200).json(result);
+});
+
+module.exports = { create, getAll };
