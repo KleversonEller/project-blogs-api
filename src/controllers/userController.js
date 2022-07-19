@@ -19,8 +19,6 @@ const create = rescue(async (req, res, next) => {
 
     if (result.error) return next(result.error);
 
-    delete result.password;
-
     const jwtConfig = { expiresIn: '3h', algorithm: 'HS256' };
     const token = jwt.sign({ data: result }, secret, jwtConfig);
 

@@ -3,8 +3,9 @@ const errorList = require('../helpers/erros');
 
 const create = async (objeto) => {
     try {
-        const result = await User.create(objeto);
-        return result.dataValues;
+        const result = await User.create(objeto,
+            { attributes: { exclude: ['password'] }, raw: true });
+        return result;
     } catch (err) {
         return errorList.duplicity;
     }
@@ -12,8 +13,7 @@ const create = async (objeto) => {
 
 const getAll = async () => {
     try {
-        const get = await User.findAll({ attributes: { exclude: ['password'] } });
-        const result = get.map((user) => user.dataValues);
+        const result = await User.findAll({ attributes: { exclude: ['password'] }, raw: true });
         return result;
     } catch (error) {
         return null;
@@ -22,8 +22,10 @@ const getAll = async () => {
 
 const getForId = async (id) => {
     try {
-        const result = await User.findByPk(id, { attributes: { exclude: ['password'] } });
-        return result.dataValues;
+        const result = await User.findByPk(id,
+            { attributes: { exclude: ['password'] }, raw: true });
+        if (!result) return errorList.userNotFound;
+        return result;
     } catch (error) {
         return errorList.userNotFound;
     }
