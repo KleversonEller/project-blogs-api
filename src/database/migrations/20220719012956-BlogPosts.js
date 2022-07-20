@@ -27,12 +27,14 @@ module.exports = {
         primaryKey: true,
       },
       published: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
       },
       updated: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
       },
     });
   },
