@@ -9,7 +9,7 @@ const create = rescue(async (req, res, next) => {
     if (error) return next(error);
 
     const result = await service.category.create(req.body);
-    if (!result) return next(result);
+    if (!result) return next(result.error);
 
     return res.status(201).json(result);
 });

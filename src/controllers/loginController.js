@@ -10,9 +10,8 @@ module.exports = rescue(async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) return next(errorList.required.error);
 
-    const user = await service.login(email, password);
+    const user = await service.login(email);
     if (user.error) return next(user.error);
-    delete user.password;
 
     const jwtConfig = { expiresIn: '3h', algorithm: 'HS256' };
     const token = jwt.sign({ data: user }, secret, jwtConfig);
